@@ -5,6 +5,9 @@ import com.bankmanagement.banker.repo.AccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class AccountService {
 
@@ -20,4 +23,13 @@ public class AccountService {
         return save.toString();
     }
 
+    // --> Retrieve all accounts
+    public List<Account> getAllAccounts(){
+        return accountRepo.findAll();
+    }
+
+    // --> Retrieve Account Information by ID
+    public Optional<Account> getAccountById(String id) {
+            return accountRepo.findById(id);
+    }
 }
