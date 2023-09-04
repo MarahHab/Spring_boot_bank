@@ -2,6 +2,7 @@ package com.bankmanagement.banker.accountController;
 
 import com.bankmanagement.banker.model.Account;
 import com.bankmanagement.banker.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ import java.util.List;
 public class AccountController {
 
     private final AccountService accountService;
-
+    @Autowired
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
