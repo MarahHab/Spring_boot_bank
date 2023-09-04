@@ -3,9 +3,11 @@ package com.bankmanagement.banker.accountController;
 import com.bankmanagement.banker.model.Account;
 import com.bankmanagement.banker.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/account")
@@ -28,8 +30,8 @@ public class AccountController {
     // endpoint to fetch all accounts
     @GetMapping("/return-all-accounts")
     public List<Account> returnAllAccounts() {
-        //  TO DO
-        return null;
+        //  TO DO  , Retrieve all accounts
+        return accountService.getAllAccounts();
     }
 
     // endpoint to update account details
@@ -41,9 +43,16 @@ public class AccountController {
 
     // endpoint to check account status
     @GetMapping("/check-account/{id}")
-    public String getAccountDetails() {
+    public ResponseEntity<Account> getAccountDetails(@PathVariable String id) {
         // TO DO
-        return "Account details fetched successfully";
+        Optional<Account> optionalAccount=accountService.getAccountById(id);
+        if(optionalAccount.isPresent()){
+            Account account=optionalAccount.get();
+            return ResponseEntity.ok(account);
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
+       // return "Account details fetched successfully";
     }
-
 }
